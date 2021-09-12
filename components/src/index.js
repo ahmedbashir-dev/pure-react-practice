@@ -159,6 +159,15 @@ const SingleLineEmail = ({email})=>{
   );
 }
 
+const ErrorBox = ({children}) =>{
+  return(
+    <div className="alert alert-danger" role="alert">
+      <i class="fas fa-exclamation-triangle pe-2"></i> 
+      {children}
+    </div>
+  );
+}
+
 const demoEmail = {
   sender:"React Newsletter",
   subject: "React Newsletter Issue - 36",
@@ -181,7 +190,19 @@ ReactDOM.render(
     <Header title="Image Poster Exercise"/>
     <Poster src="https://image.shutterstock.com/image-vector/steel-nail-realistic-vector-illustration-260nw-1174108240.jpg" title="Demotivational Image Poster" text = "Image Poster Example" />
     <br/>
+    <Header title="Single Line Email Exercise"/>
     <SingleLineEmail email = {demoEmail}/>
+    <div className = "container">
+      <div className="row justify-content-center">
+        <div className="col-sm-8">
+        <Header title="Error Box Child Props Exercise"/>
+          <ErrorBox>
+            Something has gone wrong
+          </ErrorBox>
+        </div>
+      </div>
+
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
