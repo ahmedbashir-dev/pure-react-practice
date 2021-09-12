@@ -124,6 +124,7 @@ const Poster = ({src, title, text}) => {
 }
 
 const SingleLineEmail = ({email})=>{
+  let {sender, subject, date, message} = email;
   return(
     <div className = "container">
       <div className="row email-border pt-2 bg-light">
@@ -136,18 +137,18 @@ const SingleLineEmail = ({email})=>{
           <div className="col-sm-11 ">
             <div className="row lh-sm">
               <div className = "col-sm-3">
-                <p className = "email-header-text text-start">React Newsetter</p>
+                <p className = "email-header-text text-start">{sender}</p>
               </div>
               <div className = "col-sm-6">
-                <p className = "email-header-text text-center">React Newsetter Issue - 16</p>
+                <p className = "email-header-text text-center">{subject}</p>
               </div>
               <div className = "col-sm-3 ">
-                <p className = "email-header-text text-end">June 15</p>
+                <p className = "email-header-text text-end">{date}</p>
               </div>
             </div>
             <div className="row lh-sm">
               <div className="col-sm-12 lh-vsm">
-                <p className="email-body-text">React Newsletter Issue 16 - June 15th 2021 Read this issue on the web http://reactjs.com/issues/?id=36... </p> 
+                <p className="email-body-text">{message} </p> 
               </div>
             </div>
           </div>
@@ -156,6 +157,13 @@ const SingleLineEmail = ({email})=>{
     </div>
     </div>
   );
+}
+
+const demoEmail = {
+  sender:"React Newsletter",
+  subject: "React Newsletter Issue - 36",
+  date: "June 20",
+  message: "React Newsletter Issue 16 - June 15th 2021 Read this issue on the web http://reactjs.com/issues/?id=36..."
 }
 
 ReactDOM.render(
@@ -173,7 +181,7 @@ ReactDOM.render(
     <Header title="Image Poster Exercise"/>
     <Poster src="https://image.shutterstock.com/image-vector/steel-nail-realistic-vector-illustration-260nw-1174108240.jpg" title="Demotivational Image Poster" text = "Image Poster Example" />
     <br/>
-    <SingleLineEmail />
+    <SingleLineEmail email = {demoEmail}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
