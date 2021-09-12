@@ -113,6 +113,7 @@ const Poster = ({src, title, text}) => {
           <img 
             src = {src}
             alt = {title}
+            draggable="false"
             className = "img img-fluid align-center"
           />
         </div>
@@ -132,7 +133,7 @@ const SingleLineEmail = ({email})=>{
         <div className = "row align-items-center">
           <div className="col-sm-1">
             <input type="checkbox" className="form-check-input"></input>
-            <i class="fas fa-thumbtack pin"></i>
+            <i className="fas fa-thumbtack pin"></i>
           </div>
           <div className="col-sm-11 ">
             <div className="row lh-sm">
@@ -162,7 +163,7 @@ const SingleLineEmail = ({email})=>{
 const ErrorBox = ({children}) =>{
   return(
     <div className="alert alert-danger" role="alert">
-      <i class="fas fa-exclamation-triangle pe-2"></i> 
+      <i className="fas fa-exclamation-triangle pe-2"></i> 
       {children}
     </div>
   );
@@ -174,6 +175,44 @@ const demoEmail = {
   date: "June 20",
   message: "React Newsletter Issue 16 - June 15th 2021 Read this issue on the web http://reactjs.com/issues/?id=36..."
 }
+
+const FirstChildOnly = ({children})=>{
+  return(
+    <div>
+      First Child: {' '}
+      {React.Children.toArray(children).slice(0,1)}
+    </div>
+  );
+}
+
+const LastChildOnly = ({children}) => {
+  return(
+    <div>
+      Last Child: {' '}
+      {React.Children.toArray(children).slice(-1)[0]}
+    </div>
+  );
+}
+
+const Head = ({children, number}) => {
+  return(
+    <div>
+      First {number} Elements Out of {React.Children.count(children)}: {' '}
+       {React.Children.toArray(children).slice(0,number)}
+    </div>
+  );
+}
+
+const Tail = ({children, number}) => {
+  return(
+    <div>
+      First {number} Elements Out of {React.Children.count(children)}: {' '}
+       {React.Children.toArray(children).slice(-number)}
+    </div>
+  );
+}
+
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -199,9 +238,34 @@ ReactDOM.render(
           <ErrorBox>
             Something has gone wrong
           </ErrorBox>
+          <Header title="Children Props Exercise"/>
+          <FirstChildOnly>
+            <h2>This is first child</h2>
+            <h3>This is second child</h3>
+          </FirstChildOnly>
+
+          <LastChildOnly>
+            <h3>This is First Child</h3>
+            <h3>This is Last Child</h3>
+          </LastChildOnly>
+          <Head number={3}>
+            <p>Para 1</p>
+            <p>Para 2</p>
+            <p>Para 3</p>
+            <p>Para 4</p>
+            <p>Para 5</p>
+          </Head>
+
+          <Tail number={3}>
+            <p>Para 1</p>
+            <p>Para 2</p>
+            <p>Para 3</p>
+            <p>Para 4</p>
+            <p>Para 5</p>
+          </Tail>
+        
         </div>
       </div>
-
     </div>
   </React.StrictMode>,
   document.getElementById('root')
